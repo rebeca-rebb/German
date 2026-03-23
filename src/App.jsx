@@ -19,7 +19,7 @@ function blankOutPreposition(example, preposition) {
     // Use lookahead/lookbehind on spaces and punctuation instead of \b
     // because \b doesn't work with Unicode characters (ü, ö, ä)
     const regex = new RegExp(
-      `(?<=^|[\\s,;:.!?])${p.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?=$|[\\s,;:.!?])`,
+      `(?<=^|[\\s,;:.!?„""\u201E\u201C\u201D])${p.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?=$|[\\s,;:.!?„""\u201E\u201C\u201D])`,
       "gi"
     );
     result = result.replace(regex, "______");
