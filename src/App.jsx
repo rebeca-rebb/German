@@ -20,7 +20,7 @@ function blankOutPreposition(example, preposition) {
     // because \b doesn't work with Unicode characters (ü, ö, ä)
     const regex = new RegExp(
       `(?<=^|[\\s,;:.!?])${p.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?=$|[\\s,;:.!?])`,
-      "g"
+      "gi"
     );
     result = result.replace(regex, "______");
   }
