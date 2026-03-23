@@ -87,7 +87,7 @@ function ProgressBar({ current, total }) {
   );
 }
 
-function QuizScreen({ mode, onFinish }) {
+function QuizScreen({ mode, onFinish, onBack }) {
   const [questions] = useState(() => generateQuestions());
   const [current, setCurrent] = useState(0);
   const [score, setScore] = useState(0);
@@ -157,9 +157,17 @@ function QuizScreen({ mode, onFinish }) {
     <div className="min-h-screen flex flex-col px-4 py-6 max-w-lg mx-auto">
       {/* Header */}
       <div className="flex items-center justify-between mb-2">
-        <span className="text-text-muted text-sm font-medium">
-          {current + 1} / {QUESTIONS_PER_ROUND}
-        </span>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={onBack}
+            className="text-text-muted hover:text-text transition-colors cursor-pointer text-sm"
+          >
+            ← Înapoi
+          </button>
+          <span className="text-text-muted text-sm font-medium">
+            {current + 1} / {QUESTIONS_PER_ROUND}
+          </span>
+        </div>
         <div className="flex items-center gap-3">
           {streak >= 2 && (
             <span className="text-sm font-bold animate-pulse">
@@ -368,7 +376,7 @@ function App() {
 
   if (screen === "home") return <HomeScreen onStart={startQuiz} />;
   if (screen === "quiz")
-    return <QuizScreen key={Date.now()} mode={mode} onFinish={finishQuiz} />;
+    return <QuizScreen key={Date.now()} mode={mode} onFinish={finishQuiz} onBack={restart} />;
   if (screen === "result")
     return <ResultScreen result={result} onRestart={restart} />;
 }
